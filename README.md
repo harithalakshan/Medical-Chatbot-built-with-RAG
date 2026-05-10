@@ -47,60 +47,7 @@ PHASE 4: STREAMLIT WEB UI
 --------------------------
 Real-time Chat Interface with Source Documents Display
  
-================================================================================
-                           QUICK START GUIDE
-================================================================================
- 
-PREREQUISITES:
-- Python 3.9 or higher
-- Groq API Key (get from https://console.groq.com/keys)
-- 2GB disk space for vector store
- 
-STEP 1: CLONE REPOSITORY
-------------------------
-git clone https://github.com/yourusername/medical-chatbot.git
-cd medical-chatbot
- 
-STEP 2: CREATE VIRTUAL ENVIRONMENT
------------------------------------
-python3 -m venv .venv
-source .venv/bin/activate          (macOS/Linux)
-.venv\Scripts\activate             (Windows)
- 
-STEP 3: INSTALL DEPENDENCIES
------------------------------
-pip install --upgrade pip
-pip install -r requirements.txt
- 
-STEP 4: SETUP ENVIRONMENT VARIABLES
-------------------------------------
-Create a .env file in the project root with:
-GROQ_API_KEY=gsk_your_actual_api_key_here
- 
-Get your API key from: https://console.groq.com/keys
- 
-STEP 5: BUILD VECTOR STORE (One-time)
---------------------------------------
-python create_memory_for_llm.py
- 
-Expected output:
-Length of PDF pages: XXX
-Length of Text Chunks: XXXX
-Vector store saved to vectorstore/db_faiss
- 
-STEP 6: RUN THE APPLICATION
-----------------------------
- 
-Option A: Streamlit Web UI (Recommended)
-streamlit run medibot.py
-Open http://localhost:8501 in your browser
- 
-Option B: Command-Line Interface
-python connect_memory_with_llm.py
-Type your medical question and press Enter
- 
 
- 
 ================================================================================
                             CONFIGURATION
 ================================================================================

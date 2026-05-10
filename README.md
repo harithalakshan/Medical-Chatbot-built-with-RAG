@@ -99,23 +99,7 @@ Option B: Command-Line Interface
 python connect_memory_with_llm.py
 Type your medical question and press Enter
  
-================================================================================
-                         PROJECT STRUCTURE
-================================================================================
- 
-medical-chatbot/
-├── medibot.py                           (Streamlit web UI)
-├── connect_memory_with_llm.py          (CLI chatbot interface)
-├── create_memory_for_llm.py            (Vector store builder)
-├── requirements.txt                    (Python dependencies)
-├── pyproject.toml                      (Project configuration)
-├── README.txt                          (This file)
-├── .env                                (API keys - create this)
-├── data/                               (Input PDFs - create this)
-│   └── The_GALE_ENCYCLOPEDIA_of_MEDICINE_SECOND.pdf
-├── vectorstore/                        (Generated FAISS index)
-│   └── db_faiss/
-└── .venv/                              (Virtual environment)
+
  
 ================================================================================
                             CONFIGURATION
@@ -175,49 +159,8 @@ Output:
 📚 Source Documents:
 [relevant passages from Gale Encyclopedia]
  
-================================================================================
-                       ENVIRONMENT VARIABLES
-================================================================================
- 
-GROQ_API_KEY (Required)
-Description: Your Groq API key from https://console.groq.com/keys
-Format: Should start with "gsk_"
-Example: GROQ_API_KEY=gsk_yOD8TVQHGInz5IfyHZ0wWGdyb3F...
- 
-SECURITY TIPS:
-- Never commit .env to Git
-- Use .gitignore to exclude .env
-- Use environment variables in production
-- Rotate API keys regularly
- 
-================================================================================
-                          TROUBLESHOOTING
-================================================================================
- 
-ISSUE: GROQ_API_KEY not found
-CAUSE: .env not created or in wrong location
-FIX:   Create .env in project root with GROQ_API_KEY=...
- 
-ISSUE: FAISS index not found
-CAUSE: Vector store not built
-FIX:   Run: python create_memory_for_llm.py
- 
-ISSUE: Module not found
-CAUSE: Dependencies not installed
-FIX:   Run: pip install -r requirements.txt
- 
-ISSUE: Slow responses
-CAUSE: Network latency or model overload
-FIX:   Use smaller model (llama-3.1-8b-instant)
- 
-ISSUE: Empty/irrelevant answers
-CAUSE: Query not matching knowledge base
-FIX:   Ensure PDFs in data/ folder and create_memory_for_llm.py was run
- 
-ISSUE: API rate limit
-CAUSE: Too many requests
-FIX:   Wait a few minutes or upgrade Groq plan
- 
+
+
 ================================================================================
                         PERFORMANCE METRICS
 ================================================================================
@@ -246,35 +189,7 @@ Groq's Llama generates response
 Response is based on retrieved context
 No hallucinations (factually grounded)
  
-================================================================================
-                             TESTING
-================================================================================
- 
-QUICK SANITY CHECK:
-python -c "
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_community.vectorstores import FAISS
- 
-emb = HuggingFaceEmbeddings(model_name='sentence-transformers/all-MiniLM-L6-v2')
-db = FAISS.load_local('vectorstore/db_faiss', emb, allow_dangerous_deserialization=True)
-results = db.similarity_search('What is diabetes?', k=2)
-print(f'Found {len(results)} relevant documents')
-"
- 
-TEST GROQ CONNECTION:
-python -c "
-from groq import Groq
-import os
-from dotenv import load_dotenv
- 
-load_dotenv()
-client = Groq(api_key=os.getenv('GROQ_API_KEY'))
-message = client.chat.completions.create(
-    model='llama-3.1-8b-instant',
-    messages=[{'role': 'user', 'content': 'Say hello'}]
-)
-print(f'Groq API working: {message.choices[0].message.content}')
-"
+
  
 ================================================================================
                             DEPLOYMENT
@@ -311,68 +226,12 @@ UI:               Streamlit (Interactive web interface)
 CLI:              Python argparse (Command-line interface)
 Language:         Python 3.9+ (Core implementation)
  
-================================================================================
-                      FUTURE ENHANCEMENTS
-================================================================================
+
  
-- Add authentication & user management
-- Implement chat history persistence
-- Add multiple document upload
-- Create evaluation harness (RAGAS)
-- Add feedback loop for answer quality
-- Support for multiple languages
-- Add PDF upload feature (without rebuilding)
-- Implement caching for common queries
-- Add analytics dashboard
-- Support for other medical databases/PDFs
- 
-================================================================================
-                          DISCLAIMER
-================================================================================
- 
-IMPORTANT: This tool is for EDUCATIONAL and REFERENCE purposes only.
- 
-It does NOT:
-- Provide medical advice, diagnosis, or treatment recommendations
-- Replace consultation with licensed healthcare professionals
-- Guarantee medical accuracy or completeness
-- Substitute for professional medical judgment
- 
-Always consult a licensed healthcare professional for:
-- Medical diagnosis
-- Treatment decisions
-- Health concerns
-- Medical emergencies
- 
-================================================================================
-                             LICENSE
-================================================================================
- 
-This project is licensed under the MIT License.
-See LICENSE file for details.
- 
-================================================================================
-                            CONTRIBUTING
-================================================================================
- 
-Contributions are welcome! Here's how:
- 
-1. Fork the repository
-2. Create a feature branch (git checkout -b feature/amazing-feature)
-3. Commit changes (git commit -m 'Add amazing feature')
-4. Push to branch (git push origin feature/amazing-feature)
-5. Open a Pull Request
- 
-See CONTRIBUTING.md for detailed guidelines.
- 
-================================================================================
-                          SUPPORT & CONTACT
-================================================================================
- 
-Found a bug?     Open an Issue on GitHub
-Have an idea?    Start a Discussion on GitHub
-Email:           your.email@example.com
-LinkedIn:        https://linkedin.com/in/yourprofile
+
+
+
+
  
 ================================================================================
                           ACKNOWLEDGMENTS
@@ -386,34 +245,5 @@ LinkedIn:        https://linkedin.com/in/yourprofile
 - Streamlit (Web UI framework)
 - OpenAI/Anthropic (AI research foundations)
  
-================================================================================
-                             CITATION
-================================================================================
- 
-If you use this project in research, please cite:
- 
-@software{medical_chatbot_2024,
-  title = {Medical Chatbot: RAG-Based Clinical Reference Assistant},
-  author = {Your Name},
-  year = {2024},
-  url = {https://github.com/yourusername/medical-chatbot}
-}
- 
-================================================================================
-                          GETTING STARTED
-================================================================================
- 
-1. Follow the QUICK START GUIDE section above
-2. Try asking medical questions in the Streamlit interface
-3. Check the source documents for transparency
-4. Customize configuration as needed
-5. Deploy to production if desired
- 
-Made with heart by Your Name | Powered by Groq + LangChain
- 
-For more information, visit: https://github.com/yourusername/medical-chatbot
- 
-================================================================================
-                              END OF README
-================================================================================
+
  
